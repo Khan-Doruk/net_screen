@@ -1,0 +1,20 @@
+# capture and flow features
+pyshark
+scapy
+nfstream
+
+# data and ML
+numpy
+pandas
+scikit-learn
+xgboost
+torch
+
+# backend and messaging
+fastapi
+uvicorn
+paho-mqtt
+
+# experiments
+jupyter
+matplotlib
