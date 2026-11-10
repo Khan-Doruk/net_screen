@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """Turn labeled captures into one flow table.
 
-Reads every capture listed in data/labels.csv, groups its packets into
+Reads every capture listed in the label files (data/labels.csv by default;
+several files can be given), groups its packets into
 bidirectional flows with NFStream, attaches the session label to each flow
 and writes a single CSV. Prints a per-app summary of what was collected.
 
 Usage:
     python features/extract.py data/raw data/flows.csv
+    python features/extract.py data/raw data/flows.csv --labels-csv data/labels.csv data/labels_esmer.csv
 """
 
 import argparse
@@ -57,14 +59,19 @@ def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("raw_dir", type=Path, help="folder with the .pcapng captures")
     p.add_argument("out_csv", type=Path, help="flow table to write")
-    p.add_argument("--labels-csv", type=Path, default=REPO_ROOT / "data" / "labels.csv")
+    p.add_argument("--labels-csv", type=Path, nargs="+", default=[REPO_ROOT / "data" / "labels.csv"],
+                   help="one or more label files (default data/labels.csv)")
     p.add_argument("--splt", type=int, default=20, help="first N packets kept as size/time sequences")
     p.add_argument("--min-packets", type=int, default=2, help="drop flows with fewer packets")
     args = p.parse_args()
 
-    if not args.labels_csv.exists():
-        sys.exit(f"{args.labels_csv} not found. Record sessions with capture/capture.py first.")
-    sessions = pd.read_csv(args.labels_csv)
+    missing = [str(f) for f in args.labels_csv if not f.exists()]
+    if missing:
+        sys.exit(f"Not found: {', '.join(missing)}. Record sessions with capture/capture.py first.")
+    sessions = pd.concat([pd.read_csv(f) for f in args.labels_csv], ignore_index=True)
+    dupes = sessions["file"][sessions["file"].duplicated()].unique()
+    if len(dupes):
+        sys.exit("Listed more than once: " + ", ".join(dupes))
 
     tables, used = [], []
     for row in sessions.itertuples(index=False):
@@ -91,7 +98,11 @@ def main():
     all_flows.to_csv(args.out_csv, index=False)
 
     print(f"\nWrote {len(all_flows)} flows x {all_flows.shape[1]} columns to {args.out_csv}\n")
-    print(summarize(all_flows, sessions[sessions["file"].isin(used)]).to_string())
+    used_sessions = sessions[sessions["file"].isin(used)]
+    print(summarize(all_flows, used_sessions).to_string())
+    if used_sessions["device"].nunique() > 1:
+        print("\nSessions per device:\n")
+        print(pd.crosstab(used_sessions["device"], used_sessions["label"]).to_string())
 
 
 if __name__ == "__main__":
