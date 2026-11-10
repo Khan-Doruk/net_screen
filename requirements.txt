@@ -15,6 +15,5 @@ fastapi
 uvicorn
 paho-mqtt
 
-# experiments
-jupyter
-matplotlib
+# Analysis notebooks run in Google Colab, which already has
+# jupyter, matplotlib, pandas, scikit-learn, xgboost and torch.
