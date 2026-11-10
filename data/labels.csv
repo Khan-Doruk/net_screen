@@ -1,2 +1,3 @@
 file,label,condition,device,phone_ip,phone_mac,start_utc,duration_s,notes
 youtube__plain__doruk-samsung__20261110-044235.pcapng,youtube,plain,doruk-samsung,192.168.137.106,,2026-11-10T04:42:35+00:00,60,test
+tiktok__plain__doruk-samsung__20261110-052134.pcapng,tiktok,plain,doruk-samsung,192.168.137.106,,2026-11-10T05:21:34+00:00,300,
