@@ -1,5 +1,4 @@
 file,label,condition,device,phone_ip,phone_mac,start_utc,duration_s,notes
-youtube__plain__doruk-samsung__20261110-044235.pcapng,youtube,plain,doruk-samsung,192.168.137.106,,2026-11-10T04:42:35+00:00,60,test
 tiktok__plain__doruk-samsung__20261110-052134.pcapng,tiktok,plain,doruk-samsung,192.168.137.106,,2026-11-10T05:21:34+00:00,300,
 instagram__plain__doruk-samsung__20261110-053512.pcapng,instagram,plain,doruk-samsung,192.168.137.106,,2026-11-10T05:35:12+00:00,301,
 tiktok__plain__doruk-samsung__20261110-054211.pcapng,tiktok,plain,doruk-samsung,192.168.137.106,,2026-11-10T05:42:11+00:00,301,
@@ -9,3 +8,5 @@ tiktok__plain__doruk-samsung__20261110-055904.pcapng,tiktok,plain,doruk-samsung,
 instagram__plain__doruk-samsung__20261110-060451.pcapng,instagram,plain,doruk-samsung,192.168.137.106,,2026-11-10T06:04:51+00:00,301,
 youtube__plain__doruk-samsung__20261110-062219.pcapng,youtube,plain,doruk-samsung,192.168.137.106,,2026-11-10T06:22:19+00:00,301,
 messaging__plain__doruk-samsung__20261110-063656.pcapng,messaging,plain,doruk-samsung,192.168.137.106,,2026-11-10T06:36:56+00:00,301,
+idle__plain__doruk-samsung__20261110-070423.pcapng,idle,plain,doruk-samsung,192.168.137.106,,2026-11-10T07:04:23+00:00,300,
+gaming__plain__doruk-samsung__20261110-071009.pcapng,gaming,plain,doruk-samsung,192.168.137.106,,2026-11-10T07:10:09+00:00,301,clash royale
