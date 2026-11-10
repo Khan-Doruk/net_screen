@@ -13,6 +13,7 @@ data/raw/
 *.parquet
 *.npy
 !data/labels.csv
+!data/labels_*.csv
 
 # Trained models
 *.pkl
